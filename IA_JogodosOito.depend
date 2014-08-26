@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1409085752 source:/home/alister/Dev/IA_JogodosOito/main.cpp
+	<iostream>
+	"../include/Board.h"
+	<list>
+	<queue>
+	<set>
+	<algorithm>
+	<vector>
+	<random>
+	<map>
+
+1409086330 source:/home/alister/Dev/IA_JogodosOito/src/Board.cpp
+	"../include/Board.h"
+
+1409086006 /home/alister/Dev/IA_JogodosOito/include/Board.h
+	<list>
+	<iostream>
+	<vector>
+
