@@ -144,8 +144,19 @@ Board& Board::operator=(Board* const other)
 float Board::eval_board()
 {
     if (this->cost != -1.0f) return this->cost;
-    float cost = (*this) - GOAL_BOARD;
-
+    // float cost = (*this) - GOAL_BOARD;
+    float cost = 0;
+    const short *b = board;
+    for (int i = 0; i < 9; ++i)
+    {
+        short p = b[i];
+        int row = i/3, col = i%3;
+        p = p - 1;
+        if (p < 0) p += 9;
+        int mRow = p/3, mCol = p%3;
+        // Manhattan Distance between tile position and where it should be.
+        cost += abs(row-mRow) + abs(col-mCol);
+    }
     /*
     const short* b = this->getBoard();
     for (int i = 0; i < 9; ++i)
@@ -161,6 +172,8 @@ float Board::eval_board()
     */
 
     cost += this->g;
+    this->cost = cost;
+
     return cost;
 }
 /*

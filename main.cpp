@@ -7,6 +7,8 @@
 #include <vector>
 #include <random>
 #include <map>
+#include <pthread.h>
+
 
 using namespace std;
 //typedef list<Board> l_boards;
@@ -31,7 +33,7 @@ bool piecewise_less(const Board& l, const Board& r)
 
 bool helper(Board& l, Board& r)
 {
-    return l >r;
+    return l > r;
 }
 
 void printSolution(Board& goal, map_boards& m)
@@ -43,6 +45,7 @@ void printSolution(Board& goal, map_boards& m)
     }
     cout << goal << endl;
 }
+
 
 int main()
 {
@@ -65,7 +68,7 @@ int main()
     push_heap(open.begin(), open.end(), helper);
     while (! open.empty())
     {
-        Board x = new Board(open.front());
+        Board x = Board(open.front());
         pop_heap(open.begin(), open.end(), helper); open.pop_back();
         if (x == goal)
         {
@@ -77,9 +80,9 @@ int main()
         x.getMoves(moves);
         l_boards::iterator whereOpen;
         set_boards::iterator whereClosed;
-        for (l_boards::iterator it = moves.begin(); it != moves.end(); ++it)
+        for (Board b : moves)
         {
-            Board b(*it);
+            //Board b(*it);
             if ((whereOpen = find(open.begin(), open.end(), b)) != open.end())
             {
                 if (whereOpen->getCost() <= b.getCost())
